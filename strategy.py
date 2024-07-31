@@ -4,6 +4,7 @@ import pyautogui
 
 class Strategy:
     def __init__(self):
+        # Ordem das setas do teclado que devem ser pressionadas para posicionar o agente em determinada plataforma
         self.paths = {
             '0b0000000': [],
             '0b0000100': ['up'],
@@ -31,9 +32,11 @@ class Strategy:
             '0b0101001': ['up', 'left', 'up', 'up', 'up', 'up', 'up', 'right', 'up', 'up', 'up', 'up', 'up', 'right', 'up']
         }
 
+    # Sorteia uma plataforma aleatória por onde começar a percorrer o ambiente
     def random_start(self):
         return np.random.choice(list(self.paths.keys()))
 
+    # Move, determinísticamente, o agente para a plataforma sorteada
     def position_self(self):
         platform = self.random_start()
         for step in self.paths[platform]:
@@ -41,5 +44,6 @@ class Strategy:
             time.sleep(1)
         return self.format_state(platform)
 
+    # Traduz o estado atual do agente para seu índice na q_table
     def format_state(self, state):
         return (int(state[:-2], 2) * 4) + int(state[-2:], 2)

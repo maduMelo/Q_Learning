@@ -1,10 +1,10 @@
 #Aqui vocês irão colocar seu algoritmo de aprendizado
-import connection as cn
 import numpy as np
 
-def format_state(state):
-    return (int(state[:-2], 2) * 4) + int(state[-2:], 2)
-
+import connection as cn
+import q_table as qt
+import q_agent
+import strategy
 
 # Conectando ao servidor
 socket = cn.connect(2037)
@@ -12,38 +12,49 @@ socket = cn.connect(2037)
 # Definição do ambiente
 N_STATES, N_ACTIONS = 96, 3
 MOVES = ['left', 'jump', 'right']
-Q_table = np.zeros([N_STATES, N_ACTIONS])
-
 
 # Denifindo parâmetros de aprendizado
-alpha, gamma, epilson = .2, .7, .1 # learning_rate, discount_factor, exploration_rate
-epochs = 2 # Número de episódios # 1600 epochs
+ALPHA_0, GAMMA, EPSILON_0 = .0, .7, .0 # learning_rate, discount_factor, exploration_rate
+EPOCHS = 2 # Número de episódios
 
-for epoch in range(epochs):
+# Instanciando Agente, a estratégia e iniciando a QTable
+agent = q_agent.Q_LearningAgent(N_STATES, N_ACTIONS, ALPHA_0, GAMMA, EPSILON_0)
+my_strategy = strategy.Strategy()
+agent.q_table = np.array(qt.Q_table)
+
+for epoch in range(EPOCHS):
+
+    """ Posiciona o agente em uma plataforma aleatória
+
+    if epoch != 0:
+        current_state = my_strategy.position_self()
+    else:
+    """
     current_state = 0
 
+    print('\n----------------')
     print(f'Epoch {epoch}')
+    print(f'Learning rate: {agent.get_alpha(epoch)}')
+    print(f'Tendency to explore: {agent.get_epsilon(epoch, EPOCHS)}')
+    print('----------------\n')
 
     terminal_state = False
     while not terminal_state:
         
         # Ecolher a ação que o agente irá tomar
-        if np.random.rand() < epilson:
-            print('Exploring')
-            action = np.random.randint(N_ACTIONS) # Explore
-        else:
-            print('Exploiting')
-            action = np.argmax(Q_table[current_state])  # Exploit
+        action = agent.choose_action(current_state, epoch, EPOCHS)
 
         # Executar a ação
         next_state, reward = cn.get_state_reward(socket, MOVES[action])
-        next_state = format_state(next_state)
+        next_state = my_strategy.format_state(next_state)
+
+        # Verificar se atingiu um dos estados terminais
         terminal_state = reward == -100 or reward == 300
 
         # Atualizar Q_table
-        Q_table[current_state, action] += alpha * (reward + gamma * np.max(Q_table[next_state]) - Q_table[current_state, action])
+        agent.update_q_table(current_state, action, reward, next_state, epoch)
 
         # Atualizar estado atual
         current_state = next_state
 
-np.savetxt('resultado.txt', Q_table, fmt='%.6f', delimiter=' ')
+np.savetxt('resultado.txt', agent.q_table, fmt='%.6f', delimiter=' ')
