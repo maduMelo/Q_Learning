@@ -2,7 +2,6 @@
 import numpy as np
 
 import connection as cn
-import q_table as qt
 import q_agent
 import strategy
 
@@ -17,10 +16,9 @@ MOVES = ['left', 'jump', 'right']
 ALPHA_0, GAMMA, EPSILON_0 = .0, .7, .0 # learning_rate, discount_factor, exploration_rate
 EPOCHS = 2 # Número de episódios
 
-# Instanciando Agente, a estratégia e iniciando a QTable
+# Instanciando Agente, a estratégia
 agent = q_agent.Q_LearningAgent(N_STATES, N_ACTIONS, ALPHA_0, GAMMA, EPSILON_0)
 my_strategy = strategy.Strategy()
-agent.q_table = np.array(qt.Q_table)
 
 for epoch in range(EPOCHS):
 

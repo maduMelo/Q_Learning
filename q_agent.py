@@ -8,7 +8,8 @@ class Q_LearningAgent:
 
         self.n_states = n_states
         self.n_actions = n_actions
-        self.q_table = np.zeros([n_states, n_actions])
+
+        self.q_table = np.zeros([n_states, n_actions]) # Inicializa a q_table com valores zeros
     
     # Calcula o valor da taxa de aprendizado atual
     def get_alpha(self, epoch):
