@@ -25,13 +25,15 @@ Q_Learning/
 │── strategy.py
 ```
 
-- **.gitignore**: Define arquivos e diretórios a serem ignorados pelo Git, incluindo `__pycache__/`.
-- **connection.py**: Estabelece a conexão via sockets com o servidor do ambiente simulado.
-- **q_agent.py**: Contém a classe do agente Q Learning, incluindo métodos para atualização da `q_table`, cálculo de taxas de aprendizado e exploração.
-- **strategy.py**: Define a estratégia de movimentação do agente, incluindo a sequência de comandos do teclado e a lógica para seleção de plataformas iniciais.
-- **client.py**: Principal script de execução, configurando variáveis de treinamento e iniciando o loop de aprendizado.
-- **resultado.txt**: Armazena a `q_table` resultante do processo de aprendizado.
-- **instrucoes.pdf**: Documentação detalhada dos requisitos e especificações do projeto.
+- [**.gitignore**](.gitignore): Define arquivos e diretórios a serem ignorados pelo Git, incluindo `__pycache__/`.
+- [**connection.py**](connection.py): Estabelece a conexão via sockets com o servidor do ambiente simulado.
+- [**q_agent.py**](q_agent.py): Contém a classe do agente Q Learning, incluindo métodos para atualização da `q_table`, cálculo de taxas de aprendizado e exploração.
+- [**strategy.py**](strategy.py): Define a estratégia de movimentação do agente, incluindo a sequência de comandos do teclado e a lógica para seleção de plataformas iniciais.
+- [**client.py**](client.py): Principal script de execução, configurando variáveis de treinamento e iniciando o loop de aprendizado.
+- [**resultado.txt**](resultado.txt): Armazena a `q_table` resultante do processo de aprendizado.
+- [**instrucoes.pdf**](instrucoes.pdf): Documentação detalhada dos requisitos e especificações do projeto.
+
+**OBS.:** O arquivo [connection.py](connection.py) e o conteúdo do diretório [windows/](windows/) não são de autoria desse repositório e foram disponibilizados para aplicação do algoritmo de aprendizado de máquina.
 
 ## Instruções para Execução
 
@@ -55,8 +57,4 @@ Q_Learning/
 
 ## Personalização
 
-Para personalizar o comportamento do agente ou o processo de aprendizado, edite as variáveis no arquivo `client.py`.
-
-## Licença
-
-Este projeto está licenciado sob a licença MIT.
+Para personalizar o comportamento do agente ou o processo de aprendizado, edite as variáveis no arquivo [client.py](client.py).
