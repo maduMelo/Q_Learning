@@ -33,7 +33,7 @@ Q_Learning/
 - [**resultado.txt**](resultado.txt): Armazena a `q_table` resultante do processo de aprendizado.
 - [**instrucoes.pdf**](instrucoes.pdf): Documentação detalhada dos requisitos e especificações do projeto.
 
-**OBS.:** O arquivo [connection.py](connection.py) e o conteúdo do diretório [windows/](windows/) não são de autoria desse repositório e foram disponibilizados para aplicação do algoritmo de aprendizado de máquina.
+**OBS.:** Os arquivos `connection.py` e `instrucoes.pdf` e o conteúdo do diretório `windows/` não são de autoria desse repositório e foram disponibilizados para aplicação do algoritmo de aprendizado de máquina.
 
 ## Instruções para Execução
 
