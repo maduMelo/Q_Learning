@@ -19,6 +19,7 @@ EPOCHS = 2 # Número de episódios
 # Instanciando Agente, a estratégia
 agent = q_agent.Q_LearningAgent(N_STATES, N_ACTIONS, ALPHA_0, GAMMA, EPSILON_0)
 my_strategy = strategy.Strategy()
+agent.q_table = np.loadtxt('resultado.txt')
 
 for epoch in range(EPOCHS):
 
